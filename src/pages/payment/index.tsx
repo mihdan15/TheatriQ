@@ -21,7 +21,7 @@ const Tickets = () => {
   const [showQRCode, setShowQRCode] = useState(false); // state untuk menampilkan QR Code
 
   let showSeatDetails: Seats = {};
-  let bookingChargePerTicket = 20,
+  let bookingChargePerTicket = 0.1,
     ticketCost: number,
     bookingFee: number,
     totalCost: number;
@@ -72,7 +72,8 @@ const Tickets = () => {
   }: {
     selectedSeats: string[];
   }) => {
-    bookingFee = selectedSeats.length * bookingChargePerTicket;
+    bookingFee =
+      selectedSeats.length * (show?.ticketCost || 0) * bookingChargePerTicket;
     return (
       <div className={styles.seatDetailsContainer}>
         <div className={styles.seatDetails}>Booking Charge</div>
@@ -117,6 +118,12 @@ const Tickets = () => {
     if (showIndex !== -1 && setShows) {
       shows[showIndex].seats = modifiedSeatValue();
       console.log(shows);
+
+      // Simpan ke localStorage
+      localStorage.setItem(
+        `show-${show?.id}-seats`,
+        JSON.stringify(shows[showIndex].seats)
+      );
       setShows(shows);
       // router.push("/");
       // router.push("/");
