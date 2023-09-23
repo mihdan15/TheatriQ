@@ -1,44 +1,44 @@
-import { Grid, Button } from '@mui/material';
-import Head from 'next/head'
-import Link from 'next/link';
+import { Grid, Button } from "@mui/material";
+import Head from "next/head";
+import Link from "next/link";
 
-import styles from '../styles/Home.module.scss'
-import {useGetMovies} from '../services/movies'
-import { Movie } from '../constants/models/Movies';
+import styles from "../styles/Home.module.scss";
+import { useGetShows } from "../services/shows";
+import { Show } from "../constants/models/Shows";
 
 export default function Home() {
-  const { movies, isLoading, isError } = useGetMovies();
+  const { shows, isLoading, isError } = useGetShows();
 
-  const RenderMoviesList = () => {
-    if (movies) {
-      return movies.map((movie: Movie) => (
-        <Grid item xs={4} key={movie.id}>
-          <Link href={`/details/${movie.id}`}>
+  const RenderShowsList = () => {
+    if (shows) {
+      return shows.map((show: Show) => (
+        <Grid item xs={4} key={show.id}>
+          <Link href={`/details/${show.id}`}>
             <div className={styles.card}>
-              <div className={styles.movieTitle}> {movie.name} </div>
-              <div className={styles.movieLanguage}> {movie.language} </div>
+              <div className={styles.movieTitle}> {show.name} </div>
+              <div className={styles.movieLanguage}> {show.language} </div>
             </div>
           </Link>
         </Grid>
-      ))
+      ));
     } else if (isLoading) {
-      return <>Loading Movies...</>
+      return <>Loading Shows...</>;
     } else {
-      return <>No Movies To Watch...</>
+      return <>No Shows To Watch...</>;
     }
-  }
-  
+  };
+
   return (
     <>
       <Head>
-        <title>Book My Ticket | Home</title>
+        <title>TheatriQ | Home</title>
       </Head>
       <div className={styles.moviesContainer}>
-        <h1 className={styles.title}>Recommended Movies</h1>
+        <h1 className={styles.title}>Teater Terpilih Untuk Pecinta Seni</h1>
         <Grid container spacing={2}>
-          <RenderMoviesList/>
+          <RenderShowsList />
         </Grid>
       </div>
     </>
-  )
+  );
 }

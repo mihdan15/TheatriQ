@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image'
+import Link from "next/link";
+import Image from "next/image";
 
 const Navbar = () => {
   return (
@@ -7,12 +7,14 @@ const Navbar = () => {
       <Link href="/">
         <div className="logo">
           <Image src="/logo.png" alt="site logo" width={40} height={30} />
-          <span className="logo-text">Book My Ticket</span>
+          <span className="logo-text">TheatriQ</span>
         </div>
       </Link>
-      <Link href="/"><a>Home</a></Link>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
     </nav>
-);
-}
- 
+  );
+};
+
 export default Navbar;
